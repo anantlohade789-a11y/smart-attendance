@@ -95,23 +95,14 @@ def create_app():
     app.register_blueprint(teacher_bp)
     app.register_blueprint(admin_bp)
     
-    # Create database tables and ensure admin exists
+    # Create database tables and ensure all demo accounts exist
     with app.app_context():
         db.create_all()
         try:
-            if not User.query.filter_by(role='admin').first():
-                admin = User(
-                    email='admin@school.test',
-                    full_name='System Administrator',
-                    role='admin',
-                    is_active=True
-                )
-                admin.set_password('Test1234!')
-                db.session.add(admin)
-                db.session.commit()
-                print("Default admin created: admin@school.test / Test1234!")
+            from seed_data import seed_database
+            seed_database(force=False)
         except Exception as e:
-            print(f"Notice during initial admin check: {e}")
+            print(f"Notice during initial demo data seeding: {e}")
     
     # Setup scheduler for weekly reports
     scheduler = BackgroundScheduler()
@@ -277,35 +268,9 @@ def create_app():
             if user and user.check_password(password):
                 if not user.is_active:
                     flash('Your account is inactive. Please contact an administrator.', 'danger')
-                    # Regenerate CAPTCHA
                     captcha_code = generate_captcha_code()
                     session['captcha_code'] = hash_captcha_code(captcha_code)
                     session['captcha_text'] = captcha_code
-                    return redirect(url_for('login', role_type=selected_role))
-                
-                # Check role matches selected portal
-                if selected_role == 'admin':
-                    if user.role != 'admin':
-                        flash('Invalid credentials for admin portal', 'danger')
-                        captcha_code = generate_captcha_code()
-                        session['captcha_code'] = hash_captcha_code(captcha_code)
-                        session['captcha_text'] = captcha_code
-                        log_audit(
-                            action='LOGIN_FAILED',
-                            details=f'Wrong portal access attempt: {email} tried admin portal with role {user.role}',
-                            ip_address=request.remote_addr
-                        )
-                        return redirect(url_for('login', role_type=selected_role))
-                elif user.role != selected_role:
-                    flash('Invalid username or password', 'danger')
-                    captcha_code = generate_captcha_code()
-                    session['captcha_code'] = hash_captcha_code(captcha_code)
-                    session['captcha_text'] = captcha_code
-                    log_audit(
-                        action='LOGIN_FAILED',
-                        details=f'Wrong portal access: {email} tried {selected_role} portal with role {user.role}',
-                        ip_address=request.remote_addr
-                    )
                     return redirect(url_for('login', role_type=selected_role))
                 
                 # Successful login
@@ -318,7 +283,7 @@ def create_app():
                 log_audit(
                     user_id=user.id,
                     action='LOGIN',
-                    details=f'User {email} logged in via {selected_role} portal',
+                    details=f'User {email} logged in ({user.role})',
                     ip_address=request.remote_addr
                 )
                 
@@ -328,6 +293,14 @@ def create_app():
                     return redirect(url_for('change_password_first_login'))
                 
                 flash(f'Welcome back, {user.full_name}!', 'success')
+                
+                # Automatically redirect user to their correct dashboard
+                if user.role in ['undergraduate', 'postgraduate']:
+                    return redirect(url_for('student.dashboard'))
+                elif user.role == 'employee':
+                    return redirect(url_for('teacher.dashboard'))
+                elif user.role == 'admin':
+                    return redirect(url_for('admin.dashboard'))
                 return redirect(url_for('dashboard'))
             else:
                 flash('Invalid username or password', 'danger')
@@ -338,7 +311,7 @@ def create_app():
                 
                 log_audit(
                     action='LOGIN_FAILED',
-                    details=f'Failed login attempt for {email} on {selected_role} portal',
+                    details=f'Failed login attempt for {email}',
                     ip_address=request.remote_addr
                 )
         

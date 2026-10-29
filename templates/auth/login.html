@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}NED Portal Login - Smart Attendance{% endblock %}
+{% block title %}Deogiri College - Portal Login{% endblock %}
 
 {% block content %}
 <style>
@@ -59,33 +59,36 @@
 
 <div class="min-h-[calc(100vh-8rem)] flex items-center justify-center py-4 px-2">
     <div class="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
-        <!-- NED University Header -->
-        <div class="bg-gradient-to-r from-blue-800 to-blue-900 p-4 text-center">
-            <div class="flex items-center justify-center gap-3 mb-3">
-                <img src="{{ url_for('static', filename='images/ned_logo.png') }}" alt="NED University" class="h-16 w-16">
+        <!-- DEOGIRI COLLEGE Header -->
+        <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-800 p-4 text-center">
+            <div class="flex items-center justify-center gap-4 mb-2">
+                <img src="{{ url_for('static', filename='images/deogiri.jpg') }}" alt="Deogiri College" class="h-16 w-16 rounded-full object-cover border-2 border-yellow-400 shadow-md">
                 <div class="text-left">
-                    <h2 class="text-white text-lg font-bold">NED UNIVERSITY</h2>
-                    <p class="text-blue-200 text-xs">OF ENGINEERING & TECHNOLOGY</p>
+                    <h2 class="text-white text-xl font-bold tracking-wider">DEOGIRI COLLEGE</h2>
+                    <p class="text-yellow-300 text-xs font-semibold">CHHATRAPATI SAMBHAJINAGAR</p>
                 </div>
             </div>
         </div>
         
         <!-- Portal Title -->
-        <div class="bg-gradient-to-r from-red-600 to-red-700 text-white p-4 text-center rounded-lg mx-4 -mt-2 shadow-lg">
-            <h1 class="text-xl sm:text-2xl font-bold">Smart Attendance System</h1>
+        <div class="bg-gradient-to-r from-indigo-700 to-blue-700 text-white p-3 text-center rounded-lg mx-4 -mt-2 shadow-lg">
+            <h1 class="text-lg sm:text-xl font-bold">Smart Attendance Management Portal</h1>
         </div>
 
         <!-- Tab Navigation -->
-        <div class="flex border-b border-gray-200 bg-gray-50 mt-4">
-            <button class="tab-button {% if role_type == 'employee' %}active{% endif %} flex-1 text-sm sm:text-base" onclick="switchTab('employee')" id="tab-employee">
-                Employee
+        <div class="flex border-b border-gray-200 bg-gray-50 mt-4 overflow-x-auto">
+            <button class="tab-button {% if role_type == 'employee' %}active{% endif %} flex-1 text-xs sm:text-sm" onclick="switchTab('employee')" id="tab-employee">
+                Faculty / Teacher
             </button>
-            <button class="tab-button {% if role_type == 'undergraduate' %}active{% endif %} flex-1 text-sm sm:text-base" onclick="switchTab('undergraduate')" id="tab-undergraduate">
+            <button class="tab-button {% if role_type == 'undergraduate' %}active{% endif %} flex-1 text-xs sm:text-sm" onclick="switchTab('undergraduate')" id="tab-undergraduate">
                 Undergraduate
             </button>
-            <button class="tab-button {% if role_type == 'postgraduate' %}active{% endif %} flex-1 text-sm sm:text-base" onclick="switchTab('postgraduate')" id="tab-postgraduate">
+            <button class="tab-button {% if role_type == 'postgraduate' %}active{% endif %} flex-1 text-xs sm:text-sm" onclick="switchTab('postgraduate')" id="tab-postgraduate">
                 Postgraduate
             </button>
+            <a href="{{ url_for('admin_login') }}" class="tab-button flex-1 text-xs sm:text-sm text-center bg-gray-100 hover:bg-gray-200 text-purple-700 font-semibold" id="tab-admin">
+                Admin Portal &rarr;
+            </a>
         </div>
 
         <!-- Tab Content -->
