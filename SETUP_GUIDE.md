@@ -46,7 +46,7 @@ Your computer needs **Python** to run this project. If you don't already have it
 We have created an automated setup script that does all the technical work for you:
 - Creates an isolated virtual environment (`venv`)
 - Installs all required libraries (`Flask`, `SQLAlchemy`, `geopy`, `Pillow`, etc.)
-- Sets up the database and pre-loads sample teachers, students, subjects, and classes
+- Sets up the database and creates the default administrator account
 
 ### How to run it:
 1. Open this project folder in Windows File Explorer:
@@ -84,17 +84,15 @@ When presenting this project to your college professor or external viva examiner
 
 | Role | Login Page | Email | Password |
 | :--- | :--- | :--- | :--- |
-| **Admin** | `http://127.0.0.1:5000/auth/admin` | `admin@school.test` | `Test1234!` |
-| **Teacher** | `http://127.0.0.1:5000/login/employee` | `employee@school.test` | `Test1234!` |
-| **Student** | `http://127.0.0.1:5000/login/undergraduate` | `student1@school.test` | `Test1234!` |
+| **Admin** | `http://127.0.0.1:5000/auth/admin` | See local setup output | See local setup output |
 
-*(Note: On the login page, you will see a 4-letter CAPTCHA image. Type those letters into the verification box to log in).*
+Teacher and student development accounts are seeded locally. Login pages display a CAPTCHA that must be completed.
 
 ---
 
 ### Step 4.1: Show the Admin Dashboard
 1. Go to `http://127.0.0.1:5000/auth/admin`.
-2. Login with `admin@school.test` / `Test1234!`.
+2. Log in using the administrator details shown by local setup.
 3. **What to highlight to your examiner**:
    - Total Students, Teachers, Subjects, and Attendance records counter.
    - Click **"User Management"** to show how admins can add, filter, or deactivate students/teachers.
@@ -103,8 +101,8 @@ When presenting this project to your college professor or external viva examiner
 ---
 
 ### Step 4.2: Show the Teacher Dashboard & Create a Class Session
-1. Log out, then go to `http://127.0.0.1:5000/login/employee`.
-2. Login with `employee@school.test` / `Test1234!`.
+1. Log out, then open `http://127.0.0.1:5000/login/employee`.
+2. Log in using the employee development account details shown by local setup.
 3. **What to highlight**:
    - View assigned subjects (e.g. *Introduction to Computer Science*, *Data Structures*).
    - Click **"Create Session"**:
@@ -120,7 +118,7 @@ When presenting this project to your college professor or external viva examiner
 
 ### Step 4.3: Show the Student Scanning & Marking Attendance
 1. In another browser tab (or Incognito window), go to `http://127.0.0.1:5000/login/undergraduate`.
-2. Login with `student1@school.test` / `Test1234!`.
+2. Log in using the student development account details shown by local setup.
 3. Click **"Scan QR"** in the top navigation.
 4. Allow Camera and Location permissions when the browser asks.
 5. Point the webcam at the teacher's QR code (or show the QR image).
@@ -171,10 +169,10 @@ To access your laptop's server from your phone:
 
 ## Step 6: Resetting the Database Anytime
 
-If you want to clear test data and start fresh with pristine demo accounts before your college presentation:
+If you want to clear local test data and start fresh with only the default administrator:
 1. Double-click **`reset_database.bat`**.
 2. Press `Y` when prompted.
-3. The script automatically clears old test check-ins and re-seeds clean demo data!
+3. This permanently deletes the local database and re-creates the local development accounts and sample classes.
 
 ---
 

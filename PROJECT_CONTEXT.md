@@ -251,18 +251,9 @@ The system segregates permissions strictly via role-based access decorators (`@r
 
 ---
 
-## 7. Demo Accounts Reference Sheet
+## 7. Demo Accounts
 
-| Role | Portal URL | Email | Password |
-| :--- | :--- | :--- | :--- |
-| **System Admin** | `/auth/admin` | `admin@school.test` | `Test1234!` |
-| **Default Admin (Fresh DB)** | `/auth/admin` | `admin@neduet.edu.pk` | `admin123` |
-| **Faculty / Teacher 1** | `/login/employee` | `employee@school.test` | `Test1234!` |
-| **Faculty / Teacher 2** | `/login/employee` | `employee2@school.test` | `Test1234!` |
-| **Student 1** | `/login/undergraduate` | `student1@school.test` | `Test1234!` |
-| **Student 2** | `/login/undergraduate` | `student2@school.test` | `Test1234!` |
-
-*(Students 1 through 10 all share the password `Test1234!`)*
+Local setup seeds development accounts for the administrator, employees, and students. Account credentials are intentionally omitted from this Markdown guide; see the local setup output and seed configuration.
 
 ---
 

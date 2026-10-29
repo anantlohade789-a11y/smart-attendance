@@ -72,10 +72,9 @@ Render will now read the `render.yaml` configuration and perform the following a
 1. ✅ Provision a free **PostgreSQL Database** (`attendance-db`).
 2. ✅ Connect the database to the Flask application automatically (`DATABASE_URL`).
 3. ✅ Install all required libraries (`Flask`, `SQLAlchemy`, `gunicorn`, `geopy`, etc.).
-4. ✅ Start the web server using `gunicorn app:create_app()`.
-5. ✅ Automatically create your default admin account on startup:
-   - **Admin Email**: `admin@school.test`
-   - **Admin Password**: `Test1234!`
+4. ✅ Start the web server using `gunicorn wsgi:app`.
+5. ✅ Create the default administrator on startup if the database is empty:
+   - Credentials are provisioned by the application and are not listed in this guide.
 
 Wait about 3–5 minutes until you see the green **"Live"** badge!
 
@@ -85,12 +84,12 @@ Wait about 3–5 minutes until you see the green **"Live"** badge!
 
 1. On your Render dashboard, click on your **smart-attendance** Web Service.
 2. At the top left, under the service name, you will see your live public URL:
-   👉 **`https://smart-attendance-xxxx.onrender.com`**
+   👉 **`https://smart-attendance-lj9c.onrender.com`**
 3. Open this link on your laptop, or send it to your smartphone!
 
 ### Testing from Mobile Phone
 - Because Render gives you an official **`https://`** certificate, you can open this link on **any iPhone or Android phone** anywhere in the world!
-- Log in as student (`student1@school.test` / `Test1234!`), tap **"Scan QR"**, and your camera + GPS will work immediately!
+- Create employee and student accounts from the administrator portal before testing those roles. On the student account, tap **"Scan QR"**; camera and GPS require browser permissions.
 
 ---
 
@@ -98,8 +97,8 @@ Wait about 3–5 minutes until you see the green **"Live"** badge!
 
 | Role | Portal URL | Email | Password |
 | :--- | :--- | :--- | :--- |
-| **System Admin** | `https://your-app.onrender.com/auth/admin` | `admin@school.test` | `Test1234!` |
-| **Faculty / Teacher** | `https://your-app.onrender.com/login/employee` | `employee@school.test` | `Test1234!` |
-| **Student** | `https://your-app.onrender.com/login/undergraduate` | `student1@school.test` | `Test1234!` |
+| **System Admin** | `https://smart-attendance-lj9c.onrender.com/auth/admin` | Provisioned separately | Provisioned separately |
+| **Faculty / Teacher** | `https://smart-attendance-lj9c.onrender.com/login/employee` | Created in the admin portal | Set when creating the user |
+| **Student** | `https://smart-attendance-lj9c.onrender.com/login/undergraduate` | Created in the admin portal | Set when creating the user |
 
-*(Note: If you want to populate sample classes and multiple students into your Render PostgreSQL database, you can go to the Render Web Service page -> click the **"Shell"** tab on the left, and type `python seed_data.py`!)*
+The app seeds development accounts and sample classes when the database is empty. Change the default passwords and remove unused sample data before using the deployment with real users.

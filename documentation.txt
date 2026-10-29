@@ -132,7 +132,7 @@ flask db migrate -m "Initial migration"
 # Apply migrations to create database tables
 flask db upgrade
 
-# Seed initial data (creates admin account and sample data)
+# Seed initial data (creates local development accounts and sample classes)
 python seed_data.py
 
 # Test locally (optional but recommended)
@@ -312,12 +312,10 @@ flask db upgrade
 python seed_data.py
 
 5. You should see success messages
-6. Your app is now live at: https://smart-attendance-app.onrender.com
+6. Your app is now live at: https://smart-attendance-lj9c.onrender.com
 
 Default Admin Login:
-- Email: admin@school.edu
-- Password: admin123
-(Change this immediately after first login!)
+- Use the credentials printed by the local setup script.
 
 ================================================================================
 STEP 11: GMAIL APP PASSWORD SETUP
@@ -370,7 +368,7 @@ Render Setup:
 □ Build completed successfully
 □ Deployment is live
 □ Production database initialized (flask db upgrade)
-□ Initial data seeded (python seed_data.py)
+□ Default administrator created (python seed_data.py)
 □ App accessible at Render URL
 
 Post-Deployment:

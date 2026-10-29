@@ -70,13 +70,12 @@ MAIL_DEFAULT_SENDER=noreply@yourdomain.com
 python init_db.py
 ```
 
-This creates the database schema and seeds the default admin user.
+This creates the database schema and seeds local administrator, teacher, and student development accounts plus sample classes. Existing account passwords are not overwritten.
 
-### 3. Default Admin Credentials
+### 3. Administrator Login
 
 **Admin Portal**: `/auth/admin`
-- Email: admin@neduet.edu.pk
-- Password: admin123
+- Credentials are configured in `seed_data.py` for local development and are intentionally not repeated in project documentation.
 
 **IMPORTANT**: Change the password immediately on first login!
 

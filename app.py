@@ -95,12 +95,12 @@ def create_app():
     app.register_blueprint(teacher_bp)
     app.register_blueprint(admin_bp)
     
-    # Create database tables and ensure all demo accounts exist
+    # Create database tables and ensure development accounts exist
     with app.app_context():
         db.create_all()
         try:
             from seed_data import seed_database
-            seed_database(force=False)
+            seed_database(force=False, app=app)
         except Exception as e:
             print(f"Notice during initial demo data seeding: {e}")
     

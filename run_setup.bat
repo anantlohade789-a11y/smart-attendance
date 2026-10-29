@@ -67,7 +67,7 @@ if errorlevel 1 (
 echo     -> All libraries installed successfully!
 echo.
 
-echo [4/4] Setting up SQLite database with demo accounts and sample classes...
+echo [4/4] Setting up SQLite database with development accounts and sample classes...
 "venv\Scripts\python.exe" seed_data.py
 if errorlevel 1 (
     echo [WARNING] Seeding returned an alert, attempting init_db...
@@ -90,13 +90,13 @@ echo   - Admin Portal:   http://127.0.0.1:5000/auth/admin
 echo     Email:          admin@school.test
 echo     Password:       Test1234!
 echo.
-echo   - Teacher Portal: http://127.0.0.1:5000/login/employee
+echo   - Employee Portal: http://127.0.0.1:5000/login/employee
 echo     Email:          employee@school.test
-echo     Password:       Test1234!
+echo     Password:       password123
 echo.
 echo   - Student Portal: http://127.0.0.1:5000/login/undergraduate
 echo     Email:          student1@school.test
-echo     Password:       Test1234!
+echo     Password:       password123
 echo.
 echo Press any key to close this window...
 pause >nul

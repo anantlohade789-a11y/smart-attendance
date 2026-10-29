@@ -69,7 +69,7 @@ Write-Host "      -> All libraries installed successfully!" -ForegroundColor Gre
 Write-Host ""
 
 # 4. Initialize Database
-Write-Host "[4/4] Setting up SQLite database with demo accounts & sessions..." -ForegroundColor Green
+Write-Host "[4/4] Setting up SQLite database with development accounts and sample classes..." -ForegroundColor Green
 & "venv\Scripts\python.exe" seed_data.py
 
 Write-Host ""
@@ -82,6 +82,6 @@ Write-Host "   .\start.ps1   (or double-click start_app.bat)" -ForegroundColor Y
 Write-Host ""
 Write-Host "Login Credentials:" -ForegroundColor White
 Write-Host "   - Admin Portal:   http://127.0.0.1:5000/auth/admin (admin@school.test / Test1234!)" -ForegroundColor Gray
-Write-Host "   - Teacher Portal: http://127.0.0.1:5000/login/employee (employee@school.test / Test1234!)" -ForegroundColor Gray
-Write-Host "   - Student Portal: http://127.0.0.1:5000/login/undergraduate (student1@school.test / Test1234!)" -ForegroundColor Gray
+Write-Host "   - Employee Portal: http://127.0.0.1:5000/login/employee (employee@school.test / password123)" -ForegroundColor Gray
+Write-Host "   - Student Portal:  http://127.0.0.1:5000/login/undergraduate (student1@school.test / password123)" -ForegroundColor Gray
 Write-Host ""
